@@ -1,28 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float force;
     private Rigidbody playerRB;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRB = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 
-    private void OnMove(InputValue input)
+    private void Move()
     {
-    
+        float verticalInput = Input.GetAxis("Vertical");
+        playerRB.AddForce(Vector3.forward * verticalInput * force);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    IEnumerator Portalcountdown()
+    IEnumerator PortalCountdown()
     {
         yield return null;
     }
