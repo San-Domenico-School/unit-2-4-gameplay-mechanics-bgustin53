@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float speed;
+    private Rigidbody playerRB;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +18,25 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnMove(InputValue input)
+    {
+    
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    IEnumerator Portalcountdown()
+    {
+        yield return null;
     }
 }

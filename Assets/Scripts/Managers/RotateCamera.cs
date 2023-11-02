@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RotateCamera : MonoBehaviour
 {
+    [SerializeField] private float rotationSpeed;
+    private GameObject focalpoint;
+
     // Start is called before the first frame update
     void Start()
     {
