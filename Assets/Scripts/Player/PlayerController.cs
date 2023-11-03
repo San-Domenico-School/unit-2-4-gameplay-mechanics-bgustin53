@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float force;
     private Rigidbody playerRB;
+    private Transform focalPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
+        focalPoint = GameObject.Find("Focal Point").transform;
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         float verticalInput = Input.GetAxis("Vertical");
-        playerRB.AddForce(Vector3.forward * verticalInput * force);
+        playerRB.AddForce(focalPoint.forward * verticalInput * force);
     }
 
     private void OnCollisionEnter(Collision collision)
