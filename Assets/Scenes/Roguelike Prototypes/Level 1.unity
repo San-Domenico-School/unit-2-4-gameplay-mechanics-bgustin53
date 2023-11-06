@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bcd2633767f4bb3a48916dbad51ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 30
+  rotationSpeed: 60
 --- !u!4 &131862627
 Transform:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640661017}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3f20557c94db74b68a1eeebc4d9f0ead, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
