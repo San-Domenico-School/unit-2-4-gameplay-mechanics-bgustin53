@@ -5,7 +5,7 @@ using UnityEngine;
 public class IceSphereController : MonoBehaviour
 {
     [SerializeField] private float startDelay;
-    [SerializeField] private float reductionRate;
+    [SerializeField] private float reductionEachFrameTo;
     [SerializeField] private float minimumVolume;
     private Rigidbody iceRB;
 
@@ -15,7 +15,7 @@ public class IceSphereController : MonoBehaviour
     {
         iceRB = GetComponent<Rigidbody>();
         RandomizeSizeAndMass();
-        InvokeRepeating("Melt", startDelay, Time.deltaTime);
+        InvokeRepeating("Melt", startDelay, 0.4f);
     }
 
     private void RandomizeSizeAndMass()
@@ -41,9 +41,9 @@ public class IceSphereController : MonoBehaviour
     // Called from Invoke Repeat
     private void Melt()
     {
-        float reduction = 1 - reductionRate;
-        transform.localScale *= reduction;
-        iceRB.mass *= reduction;
+        transform.localScale *= reductionEachFrameTo;
+        iceRB.mass *= reductionEachFrameTo;
         Dissolution();
+        Debug.Log(reductionEachFrameTo);
     }
 }

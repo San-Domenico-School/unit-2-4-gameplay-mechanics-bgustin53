@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 3
-  reductionRate: 0.0006
+  reductionEachFrameTo: 0.975
   minimumVolume: 0.2
 --- !u!1 &5976185686893000389
 GameObject:
