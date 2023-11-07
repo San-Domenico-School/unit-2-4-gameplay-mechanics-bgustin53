@@ -21,11 +21,11 @@ public class PushInteractor : MonoBehaviour
             Vector3 direction = (player.transform.position - transform.position).normalized;
             if (!playerController.powerup)
             {
-                playerRB.AddForce(direction * iceSphereRB.mass, ForceMode.Impulse);
+                playerRB.AddForce(direction * iceSphereRB.mass * 100, ForceMode.Impulse);
             }
             else
             {
-                iceSphereRB.AddForce(-direction * playerRB.mass, ForceMode.Impulse);
+                iceSphereRB.AddForce(-direction * playerRB.mass * 100, ForceMode.Impulse);
             }
         }
     }
