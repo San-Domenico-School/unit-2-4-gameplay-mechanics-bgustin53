@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Transform focalPoint;
     private float mass;
     private float drag;
+    public bool powerup { get; private set; }
 
     // Start is called before the first frame update
     void Start()
