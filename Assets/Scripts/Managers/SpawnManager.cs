@@ -24,6 +24,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         int totalIceSpheres = FindObjectsOfType<IceSphereController>().Length;
+
         if (totalIceSpheres == 0)
         {
             SpawnWave();
