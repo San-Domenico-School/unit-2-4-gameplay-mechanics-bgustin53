@@ -39,6 +39,9 @@ public class SpawnManager : MonoBehaviour
             Vector3 position = new Vector3(posX, 1.5f, posZ);
             Instantiate(iceSphere, position, iceSphere.transform.rotation);
         }
-        waveNumber += increaseEachWave;
+        if (waveNumber < maximumWave)
+        {
+            waveNumber += increaseEachWave;
+        }
     }
 }
