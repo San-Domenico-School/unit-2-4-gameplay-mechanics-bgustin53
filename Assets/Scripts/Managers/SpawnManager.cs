@@ -21,7 +21,8 @@ public class SpawnManager : MonoBehaviour
     {
         islandSize = island.bounds.size;
         waveNumber = initialWave;
-
+        Debug.Log(GameManager.currentScene);
+        
     }
 
     //Update is called once per frame
