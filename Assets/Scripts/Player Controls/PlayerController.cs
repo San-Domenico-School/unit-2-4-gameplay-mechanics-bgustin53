@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float force;
+    [SerializeField] GameObject powerupLight;
     private Rigidbody playerRB;
     private Transform focalPoint;
     private float mass;
     private float drag;
-    public bool powerup { get; private set; }
+    public bool hasPowerup { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
+        powerupLight.SetActive(true);
     }
 }
