@@ -20,8 +20,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         islandSize = island.bounds.size;
-        waveNumber = initialWave;
-        Debug.Log(GameManager.currentScene);
+        waveNumber = initialWave; 
         
     }
 
