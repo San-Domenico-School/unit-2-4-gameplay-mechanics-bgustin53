@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [Header("Objects to Spawn")]
     [SerializeField] private GameObject iceSphere;
+    [SerializeField] private GameObject powerUps;
     [SerializeField] private Collider island;
+
+    [Header("Wave Fields")]
     [SerializeField] private int initialWave;
     [SerializeField] private int increaseEachWave;
     [SerializeField] private int maximumWave;
@@ -35,14 +39,18 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < waveNumber; i++)
         {
-            float posX = (Random.value * islandSize.x) - islandSize.x / 2;
-            float posZ = (Random.value * islandSize.z) - islandSize.z / 2; ;
-            Vector3 position = new Vector3(posX, 1.5f, posZ);
-            Instantiate(iceSphere, position, iceSphere.transform.rotation);
+            Instantiate(iceSphere, SetRandomPosition(), iceSphere.transform.rotation);
         }
         if (waveNumber < maximumWave)
         {
             waveNumber += increaseEachWave;
         }
+    }
+
+    private Vector3 SetRandomPosition()
+    {
+        float posX = (Random.value * islandSize.x) - islandSize.x / 2;
+        float posZ = (Random.value * islandSize.z) - islandSize.z / 2; ;
+        return new Vector3(posX, 1.5f, posZ);
     }
 }

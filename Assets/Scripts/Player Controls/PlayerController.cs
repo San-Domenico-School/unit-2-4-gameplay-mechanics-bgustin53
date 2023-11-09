@@ -30,11 +30,6 @@ public class PlayerController : MonoBehaviour
         playerRB.AddForce(focalPoint.forward * verticalInput * force * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other);
