@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         playerRB.drag = GameManager.Instance.playerDrag;
         moveForce = GameManager.Instance.playerMoveForce;
         playerCollider.material.bounciness = 0;
-        powerupIndicator.intensity = 0;        
+        powerupIndicator.intensity = 0;
     }
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         float verticalInput = Input.GetAxis("Vertical");
+        Debug.Log(verticalInput);
         playerRB.AddForce(focalpoint.forward.normalized * verticalInput * moveForce);
     }
 
