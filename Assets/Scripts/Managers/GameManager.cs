@@ -5,13 +5,20 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    [Header("Player Fields")]
     public Vector3 playerStartPos;
     public Vector3 playerScale;
     public float playerMass;
     public float playerDrag;
-    public float playerPushForce;
     public float playerMoveForce;
     public float playerBounce;
+    public float playerRepelForce;
+
+    [Header("Debug Fields")]
+    public bool debugSpawnWaves;
+    public bool debugPowerUpRepel;
+    public bool debugSpawnPortal;
+
     public bool switchLevel { private get; set; }
     private GameObject player;
     private string nextLevel;

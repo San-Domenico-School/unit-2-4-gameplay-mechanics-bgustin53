@@ -18,14 +18,14 @@ public class MoveToTarget : MonoBehaviour
         target = GameObject.Find("Player");
         if(target != null)
         {
-            //targetRB = target.GetComponent<Rigidbody>();
+            targetRB = target.GetComponent<Rigidbody>();
         }
     }
 
     // Update is called once per frame
     private void Update()
     {
-        //MoveTowardsTarget();
+        MoveTowardsTarget();
     }
 
     private void MoveTowardsTarget()
