@@ -36,9 +36,10 @@ public class GameManager : MonoBehaviour
         //This is useful so that we cannot have more than one GameManager object in a scene at a time.
         else if (Instance != this)
             Destroy(this);
+        EnablePlayer();
     }
 
-    private void Start()
+    private void EnablePlayer()
     {
         PlayerController[] inactivePlayer = GameObject.FindObjectsOfType<PlayerController>(true);
         player = inactivePlayer[0].gameObject;

@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Wave Fields")]
     [SerializeField] private int initialWave;
-    [SerializeField] private int increasEachWave;
+    [SerializeField] private int increaseEachWave;
     [SerializeField] private int maximumWave;
 
     [Header("Portal Fields")]
@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float byWaveDuration;
 
     [Header("Island")]
-    [SerializeField] private Collider island;
+    [SerializeField] private GameObject island;
 
     private Vector3 islandSize;
     private int waveNumber;
@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        islandSize = island.bounds.size;
+        islandSize = island.GetComponent<MeshCollider>().bounds.size;
         waveNumber = initialWave;
     }
 
@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviour
 
         if(waveNumber < maximumWave)
         {
-            waveNumber++;
+            waveNumber += increaseEachWave;
         }
     }
 
@@ -78,8 +78,8 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 SetRandomPosition(float posY)
     {
-        float posX = Random.Range(-islandSize.x / 2 + 3, islandSize.x / 2 - 3);
-        float posZ = Random.Range(-islandSize.z / 2 + 3, islandSize.z / 2 - 3);
+        float posX = Random.Range(-islandSize.x / 2.75f, islandSize.x / 2.75f);
+        float posZ = Random.Range(-islandSize.z / 2.75f, islandSize.z / 2.75f);
         return new Vector3(posX, posY, posZ);
     }
 
