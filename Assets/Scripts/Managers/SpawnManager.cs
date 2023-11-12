@@ -24,8 +24,7 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 islandSize;
     private int waveNumber;
-    private bool portalInScene;
-    private GameObject instantiatedPortal;
+    private bool portalActive;
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +36,9 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveNumber >= portalFirstAppearance && !portalInScene)
+        if (waveNumber > portalFirstAppearance && !portalActive)
         {
-            SpawnPortal();
+            EnablePortal();
         }
 
         if (FindObjectsOfType<IceSphereController>().Length == 0 &&
@@ -54,7 +53,7 @@ public class SpawnManager : MonoBehaviour
     {
         for(int i = 0; i < waveNumber; i++)
         {
-            Instantiate(iceSphere, SetRandomPosition(0.0f), iceSphere.transform.rotation);
+            Instantiate(iceSphere, SetRandomPosition(0), iceSphere.transform.rotation);
         }
 
         if(waveNumber < maximumWave)
@@ -63,12 +62,12 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void SpawnPortal()
+    private void EnablePortal()
     {
-        if(Random.value < waveNumber * byWaveProbability || GameManager.Instance.debugSpawnPortal)
+        if(Random.value < waveNumber * byWaveProbability * Time.deltaTime || GameManager.Instance.debugSpawnPortal)
         {
-            instantiatedPortal = Instantiate(portal, SetRandomPosition(-0.607f), portal.transform.rotation);
-            StartCoroutine("CountdownTimer");
+            portal.transform.position = SetRandomPosition(portal.transform.position.y);
+            StartCoroutine("PortalCountdownTimer");
         }
     }
 
@@ -79,16 +78,17 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 SetRandomPosition(float posY)
     {
-        float posX = Random.value * islandSize.x - islandSize.x / 2;
-        float posZ = Random.value * islandSize.z - islandSize.z / 2;
+        float posX = Random.Range(-islandSize.x / 2 + 3, islandSize.x / 2 - 3);
+        float posZ = Random.Range(-islandSize.z / 2 + 3, islandSize.z / 2 - 3);
         return new Vector3(posX, posY, posZ);
     }
 
-    IEnumerator CountdownTimer()
+    IEnumerator PortalCountdownTimer()
     {
-        portalInScene = true;
+        portal.SetActive(true);
+        portalActive = true;
         yield return new WaitForSeconds(waveNumber * byWaveDuration);
-        portalInScene = false;
-        Destroy(instantiatedPortal);
+        portalActive = false;
+        portal.SetActive(false);
     }
 }
