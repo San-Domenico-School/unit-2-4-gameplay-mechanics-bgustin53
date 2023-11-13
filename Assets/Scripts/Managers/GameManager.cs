@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public float playerBounce;
     public float playerRepelForce;
 
+    [Header("Next Level")]
+    public string nextLevel;
+
     [Header("Debug Fields")]
     public bool debugSpawnWaves;
     public bool debugPowerUpRepel;
@@ -22,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     public bool switchLevel { private get; set; }
     private GameObject player;
-    private string nextLevel;
 
     
 
@@ -38,6 +40,9 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
             Destroy(this);
         EnablePlayer();
+        string level = "Level1";
+        string nextLevel = level.Substring(0, 5) + (int.Parse(level.Substring(5)) + 1).ToString();
+        Debug.Log(nextLevel);
     }
 
     private void EnablePlayer()
@@ -54,7 +59,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+ 
     }
 
     private void SwitchLevels()
