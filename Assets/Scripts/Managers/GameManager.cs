@@ -14,9 +14,6 @@ public class GameManager : MonoBehaviour
     public float playerBounce;
     public float playerRepelForce;
 
-    [Header("Next Level")]
-    public string nextLevel;
-
     [Header("Debug Fields")]
     public bool debugSpawnWaves;
     public bool debugPowerUpRepel;
@@ -24,9 +21,9 @@ public class GameManager : MonoBehaviour
     public bool debugTransport;
 
     public bool switchLevel { private get; set; }
+    public bool gameOver { private get; set; }
     private GameObject player;
-
-    
+    private int lastLevel = 2;
 
     // Awake is called before any Start methods are called
     void Awake()
@@ -40,6 +37,8 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
             Destroy(this);
         EnablePlayer();
+
+        // Remove this, it is just for later.
         string level = "Level1";
         string nextLevel = level.Substring(0, 5) + (int.Parse(level.Substring(5)) + 1).ToString();
         Debug.Log(nextLevel);
