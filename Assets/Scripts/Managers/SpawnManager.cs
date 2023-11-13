@@ -31,6 +31,10 @@ public class SpawnManager : MonoBehaviour
     {
         islandSize = island.GetComponent<MeshCollider>().bounds.size;
         waveNumber = initialWave;
+        if(GameManager.Instance.debugTransport)
+        {
+            byWaveDuration = 99;
+        }
     }
 
     // Update is called once per frame

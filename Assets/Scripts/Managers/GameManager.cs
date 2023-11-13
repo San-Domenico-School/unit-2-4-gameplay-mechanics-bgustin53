@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool debugSpawnWaves;
     public bool debugPowerUpRepel;
     public bool debugSpawnPortal;
+    public bool debugTransport;
 
     public bool switchLevel { private get; set; }
     private GameObject player;
