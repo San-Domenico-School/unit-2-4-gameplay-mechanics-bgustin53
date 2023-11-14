@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
     private float moveForce;
     public bool hasPowerup { get; private set; }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // OnEnable is called when the player is enabled
     void OnEnable()
     {
@@ -35,6 +40,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        if(transform.position.y < -10)
+        {
+            GameManager.Instance.gameOver = true;
+            gameObject.SetActive(false);
+        }
     }
 
     private void Move()

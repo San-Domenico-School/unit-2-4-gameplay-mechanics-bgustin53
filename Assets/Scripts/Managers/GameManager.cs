@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     public float playerBounce;
     public float playerRepelForce;
 
+    [Header("Levels Fields")]
+    public int lastLevel;
+
     [Header("Debug Fields")]
     public bool debugSpawnWaves;
     public bool debugPowerUpRepel;
@@ -23,7 +27,6 @@ public class GameManager : MonoBehaviour
     public bool switchLevel { private get; set; }
     public bool gameOver { private get; set; }
     private GameObject player;
-    private int lastLevel = 2;
 
     // Awake is called before any Start methods are called
     void Awake()
@@ -58,11 +61,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
+        if(switchLevel || gameOver)
+        {
+            SwitchLevels();
+        }
     }
 
     private void SwitchLevels()
     {
+        // Get the name of the currently active scene
+        string currentScene = SceneManager.GetActiveScene().name;
 
+        // Extract the level number from the scene name
+        int nextLevel = int.Parse(currentScene.Substring(5)) + 1;
+        if(nextLevel > lastLevel)
+        {
+            gameOver = true;
+            Debug.Log("You won");
+        }
+
+
+        // Create the name of the next scene based on the current level
+        string nextScene = "Level" + nextLevel;
+
+        // If the game is over, reset to Level 1
+        if (gameOver)
+        {
+            nextScene = "Level1";
+        }
+
+        // Load the next scene
+        SceneManager.LoadScene(nextScene);
     }
 }
