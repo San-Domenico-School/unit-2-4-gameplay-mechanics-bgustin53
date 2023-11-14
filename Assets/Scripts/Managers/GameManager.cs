@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Levels Fields")]
     public int lastLevel;
+    public GameObject[] waypoints;
 
     [Header("Debug Fields")]
     public bool debugSpawnWaves;
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
         // Remove this, it is just for later.
         string level = "Level1";
         string nextLevel = level.Substring(0, 5) + (int.Parse(level.Substring(5)) + 1).ToString();
-        Debug.Log(nextLevel);
     }
 
     private void EnablePlayer()

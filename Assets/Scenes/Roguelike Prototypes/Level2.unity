@@ -866,7 +866,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5cc8636698a9a4482b9489c7f82cd4c7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 4e2d6a1e5aa4e4e9a8b85edc84fe9c98, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1926634903
 GameObject:
@@ -1253,6 +1253,7 @@ MonoBehaviour:
   playerBounce: 0.5
   playerRepelForce: 0.75
   lastLevel: 0
+  waypoints: []
   debugSpawnWaves: 0
   debugPowerUpRepel: 1
   debugSpawnPortal: 1
