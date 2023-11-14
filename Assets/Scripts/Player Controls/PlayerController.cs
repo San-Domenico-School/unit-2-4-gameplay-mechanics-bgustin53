@@ -54,6 +54,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered");
+        if(other.gameObject.CompareTag("Portal"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Portal");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Portal"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+            if(transform.position.y < other.transform.position.y - 1)
+            {
+                gameObject.SetActive(false);
+                GameManager.Instance.switchLevel = true;
+            }
+        }
     }
 }
