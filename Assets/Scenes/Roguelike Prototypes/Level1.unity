@@ -597,8 +597,11 @@ MonoBehaviour:
   increaseEachWave: 1
   maximumWave: 3
   portalFirstAppearance: 2
-  byWaveProbability: 0.03
-  byWaveDuration: 3
+  portalByWaveProbability: 0.03
+  portalByWaveDuration: 3
+  PowerUpFirstAppearance: 0
+  PowerUpByWaveProbability: 0
+  PowerUpByWaveDuration: 0
   island: {fileID: 1403545341}
 --- !u!4 &1402164823
 Transform:

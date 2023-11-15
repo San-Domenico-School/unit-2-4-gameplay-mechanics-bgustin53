@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PowerInteractor : MonoBehaviour
 {
+    [SerializeField] private float pushForce;
     private Rigidbody iceSphereRB;
     private IceSphereController iceSphereController;
-    private float pushForce;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         iceSphereRB = GetComponent<Rigidbody>();
         iceSphereController = GetComponent<IceSphereController>();
-        pushForce = 120f;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -16,8 +16,13 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Portal Fields")]
     [SerializeField] private int portalFirstAppearance;
-    [SerializeField] private float byWaveProbability;
-    [SerializeField] private float byWaveDuration;
+    [SerializeField] private float portalByWaveProbability;
+    [SerializeField] private float portalByWaveDuration;
+
+    [Header("PowerUp Fields")]
+    [SerializeField] private int PowerUpFirstAppearance;
+    [SerializeField] private float PowerUpByWaveProbability;
+    [SerializeField] private float PowerUpByWaveDuration;
 
     [Header("Island")]
     [SerializeField] private GameObject island;
@@ -33,7 +38,7 @@ public class SpawnManager : MonoBehaviour
         waveNumber = initialWave;
         if(GameManager.Instance.debugTransport)
         {
-            byWaveDuration = 99;
+            portalByWaveDuration = 99;
         }
     }
 
@@ -42,18 +47,18 @@ public class SpawnManager : MonoBehaviour
     {
         if ((waveNumber > portalFirstAppearance || GameManager.Instance.debugSpawnPortal) && !portalActive)
         {
-            EnablePortal();
+            SetObjectActive(portal, portalByWaveDuration);
         }
 
         if (FindObjectsOfType<IceSphereController>().Length == 0 &&
            GameObject.Find("Player") != null)
         {
-            SpawnWave();
+            SpawnIceWave();
         }
 
     }
 
-    private void SpawnWave()
+    private void SpawnIceWave()
     {
         for(int i = 0; i < waveNumber; i++)
         {
@@ -66,12 +71,13 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void EnablePortal()
+    private void SetObjectActive(GameObject obj, float byWaveProbability)
     {
         if(Random.value < waveNumber * byWaveProbability * Time.deltaTime || GameManager.Instance.debugSpawnPortal)
         {
             portal.transform.position = SetRandomPosition(portal.transform.position.y);
-            StartCoroutine("PortalCountdownTimer");
+
+            StartCoroutine(CountdownTimer(portalByWaveDuration));
         }
     }
 
@@ -87,7 +93,7 @@ public class SpawnManager : MonoBehaviour
         return new Vector3(posX, posY, posZ);
     }
 
-    IEnumerator PortalCountdownTimer()
+    IEnumerator CountdownTimer(float byWaveDuration)
     {
         portal.SetActive(true);
         portalActive = true;
