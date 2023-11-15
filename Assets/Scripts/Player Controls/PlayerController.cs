@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
         moveForce = GameManager.Instance.playerMoveForce;
         playerCollider.material.bounciness = 0;
         powerupIndicator.intensity = 0;
-        if(GameManager.Instance.debugPowerUpRepel)
+        gameObject.layer = LayerMask.NameToLayer("Player");
+        if (GameManager.Instance.debugPowerUpRepel)
         {
             hasPowerup = true;
         }
