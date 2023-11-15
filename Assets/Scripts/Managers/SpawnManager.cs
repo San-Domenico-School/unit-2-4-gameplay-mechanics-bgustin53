@@ -20,9 +20,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float portalByWaveDuration;
 
     [Header("PowerUp Fields")]
-    [SerializeField] private int PowerUpFirstAppearance;
-    [SerializeField] private float PowerUpByWaveProbability;
-    [SerializeField] private float PowerUpByWaveDuration;
+    [SerializeField] private int powerUpFirstAppearance;
+    [SerializeField] private float powerUpByWaveProbability;
+    [SerializeField] private float powerUpByWaveDuration;
 
     [Header("Island")]
     [SerializeField] private GameObject island;
@@ -30,6 +30,7 @@ public class SpawnManager : MonoBehaviour
     private Vector3 islandSize;
     private int waveNumber;
     private bool portalActive;
+    private bool powerUpActive;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,12 @@ public class SpawnManager : MonoBehaviour
     {
         if ((waveNumber > portalFirstAppearance || GameManager.Instance.debugSpawnPortal) && !portalActive)
         {
-            SetObjectActive(portal, portalByWaveDuration);
+            SetObjectActive(portal, portalByWaveDuration, portalByWaveDuration);
+        }
+
+        if ((waveNumber > powerUpFirstAppearance || GameManager.Instance.debugSpawnPowerUp) && !powerUpActive)
+        {
+            SetObjectActive(powerUp, powerUpByWaveDuration, powerUpByWaveDuration);
         }
 
         if (FindObjectsOfType<IceSphereController>().Length == 0 &&
@@ -71,19 +77,15 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void SetObjectActive(GameObject obj, float byWaveProbability)
+    private void SetObjectActive(GameObject obj, float byWaveProbability, float byWaveDuration)
     {
-        if(Random.value < waveNumber * byWaveProbability * Time.deltaTime || GameManager.Instance.debugSpawnPortal)
+        if(Random.value < waveNumber * byWaveProbability * Time.deltaTime ||
+           GameManager.Instance.debugSpawnPortal || GameManager.Instance.debugSpawnPortal)
         {
-            portal.transform.position = SetRandomPosition(portal.transform.position.y);
+            obj.transform.position = SetRandomPosition(objou.transform.position.y);
 
-            StartCoroutine(CountdownTimer(portalByWaveDuration));
+            StartCoroutine(CountdownTimer(byWaveDuration));
         }
-    }
-
-    private void SpawnPowerup()
-    {
-
     }
 
     private Vector3 SetRandomPosition(float posY)
