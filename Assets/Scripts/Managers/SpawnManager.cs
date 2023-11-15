@@ -48,12 +48,12 @@ public class SpawnManager : MonoBehaviour
     {
         if ((waveNumber > portalFirstAppearance || GameManager.Instance.debugSpawnPortal) && !portalActive)
         {
-            SetObjectActive(portal, portalByWaveDuration, portalByWaveDuration);
+            //SetObjectActive(portal, portalByWaveDuration);
         }
 
         if ((waveNumber > powerUpFirstAppearance || GameManager.Instance.debugSpawnPowerUp) && !powerUpActive)
         {
-            SetObjectActive(powerUp, powerUpByWaveDuration, powerUpByWaveDuration);
+            SetObjectActive(powerUp, powerUpByWaveDuration);
         }
 
         if (FindObjectsOfType<IceSphereController>().Length == 0 &&
@@ -61,7 +61,6 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnIceWave();
         }
-
     }
 
     private void SpawnIceWave()
@@ -77,14 +76,14 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void SetObjectActive(GameObject obj, float byWaveProbability, float byWaveDuration)
+    private void SetObjectActive(GameObject obj, float byWaveProbability)
     {
         if(Random.value < waveNumber * byWaveProbability * Time.deltaTime ||
-           GameManager.Instance.debugSpawnPortal || GameManager.Instance.debugSpawnPortal)
+           GameManager.Instance.debugSpawnPortal || GameManager.Instance.debugSpawnPowerUp)
         {
-            obj.transform.position = SetRandomPosition(objou.transform.position.y);
+            obj.transform.position = SetRandomPosition(obj.transform.position.y);
 
-            StartCoroutine(CountdownTimer(byWaveDuration));
+            StartCoroutine(CountdownTimer(obj.tag));
         }
     }
 
@@ -95,12 +94,36 @@ public class SpawnManager : MonoBehaviour
         return new Vector3(posX, posY, posZ);
     }
 
-    IEnumerator CountdownTimer(float byWaveDuration)
+    IEnumerator CountdownTimer(string objectTag)
     {
-        portal.SetActive(true);
-        portalActive = true;
+        float byWaveDuration = 0;
+
+        switch (objectTag)
+        {
+            case "Portal":
+                portal.SetActive(true);
+                portalActive = true;
+                byWaveDuration = portalByWaveDuration;
+                break;
+            case "PowerUp":
+                portal.SetActive(true);
+                portalActive = true;
+                byWaveDuration = powerUpByWaveDuration;
+                break;
+        }
+
         yield return new WaitForSeconds(waveNumber * byWaveDuration);
-        portalActive = false;
-        portal.SetActive(false);
+
+        switch (objectTag)
+        {
+            case "Portal":
+                portal.SetActive(false);
+                portalActive = false;
+                break;
+            case "PowerUp":
+                portal.SetActive(false);
+                portalActive = false;
+                break;
+        }
     }
 }
