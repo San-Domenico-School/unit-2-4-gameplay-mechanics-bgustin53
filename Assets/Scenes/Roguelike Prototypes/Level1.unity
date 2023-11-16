@@ -668,9 +668,9 @@ MonoBehaviour:
   portalFirstAppearance: 2
   portalByWaveProbability: 0.03
   portalByWaveDuration: 3
-  powerUpFirstAppearance: 1
-  powerUpByWaveProbability: 1
-  powerUpByWaveDuration: 3
+  powerUpFirstAppearance: 0
+  powerUpByWaveProbability: 0
+  powerUpByWaveDuration: 0
   island: {fileID: 1403545341}
 --- !u!4 &1402164823
 Transform:
@@ -1123,9 +1123,9 @@ MonoBehaviour:
   lastLevel: 2
   waypoints: []
   debugSpawnWaves: 0
-  debugPowerUpRepel: 1
+  debugPowerUpRepel: 0
   debugSpawnPortal: 0
-  debugSpawnPowerUp: 1
+  debugSpawnPowerUp: 0
   debugTransport: 0
 --- !u!1 &4920148697084500338 stripped
 GameObject:

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Light powerupIndicator;
     private Transform focalpoint;
     private float moveForce;
-    public bool hasPowerup { get; private set; }
+    public bool hasPowerUp { get; set; }
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Player");
         if (GameManager.Instance.debugPowerUpRepel)
         {
-            hasPowerup = true;
+            hasPowerUp = true;
         }
     }
 
@@ -68,6 +68,11 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Portal"))
         {
             gameObject.layer = LayerMask.NameToLayer("Portal");
+        }
+
+        if(other.gameObject.CompareTag("PowerUp"))
+        {
+            hasPowerUp = true;
         }
     }
 

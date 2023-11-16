@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 3
-  reductionEachRepeatTo: 0.975
+  reductionEachRepeat: 0.975
   minimumVolume: 0.2
 --- !u!198 &2227486291351264919
 ParticleSystem:

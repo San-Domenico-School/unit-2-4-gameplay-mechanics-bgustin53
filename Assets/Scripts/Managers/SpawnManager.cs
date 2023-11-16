@@ -24,8 +24,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float powerUpByWaveProbability;
     [SerializeField] private float powerUpByWaveDuration;
 
-    [Header("Island")]
+    [Header("Objects")]
     [SerializeField] private GameObject island;
+    [SerializeField] private PlayerController player;
 
     private Vector3 islandSize;
     private int waveNumber;
@@ -48,12 +49,13 @@ public class SpawnManager : MonoBehaviour
     {
         if ((waveNumber > portalFirstAppearance || GameManager.Instance.debugSpawnPortal) && !portalActive)
         {
-            //SetObjectActive(portal, portalByWaveDuration);
+            SetObjectActive(portal, portalByWaveProbability);
         }
 
-        if ((waveNumber > powerUpFirstAppearance || GameManager.Instance.debugSpawnPowerUp) && !powerUpActive)
+        if ((waveNumber > powerUpFirstAppearance || GameManager.Instance.debugSpawnPowerUp)
+             && !powerUpActive)
         {
-            SetObjectActive(powerUp, powerUpByWaveDuration);
+            SetObjectActive(powerUp, powerUpByWaveProbability);
         }
 
         if (FindObjectsOfType<IceSphereController>().Length == 0 &&
@@ -82,7 +84,6 @@ public class SpawnManager : MonoBehaviour
            GameManager.Instance.debugSpawnPortal || GameManager.Instance.debugSpawnPowerUp)
         {
             obj.transform.position = SetRandomPosition(obj.transform.position.y);
-
             StartCoroutine(CountdownTimer(obj.tag));
         }
     }
@@ -106,8 +107,8 @@ public class SpawnManager : MonoBehaviour
                 byWaveDuration = portalByWaveDuration;
                 break;
             case "PowerUp":
-                portal.SetActive(true);
-                portalActive = true;
+                powerUp.SetActive(true);
+                powerUpActive = true;
                 byWaveDuration = powerUpByWaveDuration;
                 break;
         }
@@ -121,8 +122,9 @@ public class SpawnManager : MonoBehaviour
                 portalActive = false;
                 break;
             case "PowerUp":
-                portal.SetActive(false);
-                portalActive = false;
+                powerUp.SetActive(false);
+                powerUpActive = false;
+                player.hasPowerUp = false;
                 break;
         }
     }
