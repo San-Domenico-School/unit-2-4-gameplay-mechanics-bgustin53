@@ -67,14 +67,14 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnIceWave()
     {
-        for(int i = 0; i < waveNumber; i++)
+        for(int i = 0; i <= increaseEachWave * (waveNumber - 1) ; i++)
         {
             Instantiate(iceSphere, SetRandomPosition(0), iceSphere.transform.rotation);
         }
 
         if(waveNumber < maximumWave)
         {
-            waveNumber += increaseEachWave;
+            waveNumber++;
         }
     }
 
@@ -124,7 +124,6 @@ public class SpawnManager : MonoBehaviour
             case "PowerUp":
                 powerUp.SetActive(false);
                 powerUpActive = false;
-                player.hasPowerUp = false;
                 break;
         }
     }

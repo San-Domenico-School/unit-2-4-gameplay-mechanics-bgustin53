@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRB;
     private SphereCollider playerCollider;
-    private Light powerupIndicator;
+    private Light powerUpIndicator;
     private Transform focalpoint;
     private float moveForce;
-    public bool hasPowerUp { get; set; }
+    public bool hasPowerUp { get; private set; }
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         playerCollider = GetComponent<SphereCollider>();
-        powerupIndicator = GetComponent<Light>();
+        powerUpIndicator = GetComponent<Light>();
         focalpoint = GameObject.Find("Focal Point").transform;
         transform.position = GameManager.Instance.playerStartPos;
         transform.localScale = GameManager.Instance.playerScale;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         playerRB.drag = GameManager.Instance.playerDrag;
         moveForce = GameManager.Instance.playerMoveForce;
         playerCollider.material.bounciness = 0;
-        powerupIndicator.intensity = 0;
+        powerUpIndicator.intensity = 0;
         gameObject.layer = LayerMask.NameToLayer("Player");
         if (GameManager.Instance.debugPowerUpRepel)
         {
@@ -72,7 +72,9 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("PowerUp"))
         {
-            hasPowerUp = true;
+            PowerUpController powerUpController = other.gameObject.GetComponent<PowerUpController>();
+            other.gameObject.SetActive(false);
+            StartCoroutine(Cooldown(powerUpController.GetCooldown()));
         }
     }
 
@@ -87,5 +89,14 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.switchLevel = true;
             }
         }
+    }
+
+    IEnumerator Cooldown(float cooldown)
+    {
+        hasPowerUp = true;
+        powerUpIndicator.intensity = 3.5f;
+        yield return new WaitForSeconds(cooldown);
+        hasPowerUp = false;
+        powerUpIndicator.intensity = 0.0f;
     }
 }

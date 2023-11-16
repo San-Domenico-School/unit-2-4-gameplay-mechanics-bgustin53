@@ -672,6 +672,7 @@ MonoBehaviour:
   powerUpByWaveProbability: 0
   powerUpByWaveDuration: 0
   island: {fileID: 1403545341}
+  player: {fileID: 0}
 --- !u!4 &1402164823
 Transform:
   m_ObjectHideFlags: 0
