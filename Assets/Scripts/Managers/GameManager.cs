@@ -42,21 +42,6 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
             Destroy(this);
         EnablePlayer();
-
-        // Remove this, it is just for later.
-        string level = "Level1";
-        string nextLevel = level.Substring(0, 5) + (int.Parse(level.Substring(5)) + 1).ToString();
-    }
-
-    private void EnablePlayer()
-    {
-        PlayerController[] inactivePlayer = GameObject.FindObjectsOfType<PlayerController>(true);
-        player = inactivePlayer[0].gameObject;
-
-        if(player != null)
-        {
-            player.SetActive(true);
-        }
     }
 
     // Update is called once per frame
@@ -65,6 +50,17 @@ public class GameManager : MonoBehaviour
         if(switchLevel || gameOver)
         {
             SwitchLevels();
+        }
+    }
+
+    private void EnablePlayer()
+    {
+        PlayerController[] inactivePlayer = GameObject.FindObjectsOfType<PlayerController>(true);
+        player = inactivePlayer[0].gameObject;
+
+        if (player != null)
+        {
+            player.SetActive(true);
         }
     }
 
