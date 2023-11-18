@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         if(transform.position.y < -10)
         {
             GameManager.Instance.gameOver = true;
+            Debug.Log("You Lost");                 //*****   More will go here after Prototype  ***** //
             gameObject.SetActive(false);
         }
     }

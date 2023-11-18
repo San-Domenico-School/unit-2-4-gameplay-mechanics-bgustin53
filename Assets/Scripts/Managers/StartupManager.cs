@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartupManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] playerSelection;
+    private int selectedIndex;
+
     // Update is called once per frame
     void Update()
     {
@@ -23,16 +26,40 @@ public class StartupManager : MonoBehaviour
             // Check if the ray hits an object
             if (Physics.Raycast(ray, out hit))
             {
-                // Check if the object has a selectable component
-                PlayerSelection playerSelection = hit.collider.GetComponent<PlayerSelection>();
+                // Check if the object has a player selection component
+                Selectable playerSelected = hit.collider.GetComponent<Selectable>();
 
-                if (playerSelection != null)
+                // Check if a chouce was made
+                if (playerSelected != null)
                 {
-                    // Call the Select method on the selectable object
-                    playerSelection.gameObject.SetActive(false);
-                    SceneManager.LoadScene("Level1");
+                    //Extract the index of the choice from the name of the object chosen
+                    selectedIndex = playerSelected.selectedIndex;
+                    StartCoroutine("LoadLevel1Scene");
                 }
+
             }
         }
+    }
+
+    // Loads the Level1 scene asyncronously to move player into game/
+    IEnumerator LoadLevel1Scene()
+    {
+        // Set the current Scene to be able to unload it later
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // The Application loads the Scene in the background at the same time as the current Scene.
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Additive);
+
+        // Wait until the last operation fully loads to return anything
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // Move the Player into the newly loaded Scene
+        Scene level1 = SceneManager.GetSceneByName("Level1");
+        SceneManager.MoveGameObjectToScene(playerSelection[selectedIndex],level1);
+        // Unload the player selection Scene
+        SceneManager.UnloadSceneAsync(currentScene);
     }
 }
