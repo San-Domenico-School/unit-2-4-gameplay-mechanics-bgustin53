@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
     //Extracts the level number from the string to set then load the next level.
     private void SwitchLevels()
     {
+        // Stops class from calling this method
+        switchLevel = false;
+
         // Get the name of the currently active scene
         string currentScene = SceneManager.GetActiveScene().name;
 
